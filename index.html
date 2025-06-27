@@ -470,6 +470,21 @@
       const messages = document.getElementById('messages');
       const msgDiv = document.createElement('div');
       msgDiv.className = "bubble " + cls;
+      <input type="text" id="user-input" style="direction:ltr;unicode-bidi:plaintext;" placeholder="Pose ta question..." autofocus required />
+function appendMessage(text, cls, typing=false, htmlMode=false) {
+  const messages = document.getElementById('messages');
+  const msgDiv = document.createElement('div');
+  msgDiv.className = "bubble " + cls;
+  msgDiv.style.direction = "ltr"; // Force LTR ici aussi
+  msgDiv.style.unicodeBidi = "plaintext";
+  if (typing) {
+    // ... (reste inchangé)
+  } else {
+    msgDiv.innerHTML = htmlMode ? text : escapeHtml(text);
+    messages.appendChild(msgDiv);
+    messages.scrollTop = messages.scrollHeight;
+  }
+}
       if (typing) {
         // Animated dots
         let dots = document.createElement('span');
